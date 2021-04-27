@@ -66,6 +66,11 @@ document.addEventListener('DOMContentLoaded', function () {
     $('#createForm').on('submit', function (e) {
         e.preventDefault();
         var data = $(this).serialize();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
         $.ajax({
             url: 'api/events',
             type: 'POST',
@@ -101,6 +106,11 @@ document.addEventListener('DOMContentLoaded', function () {
         e.preventDefault();
         var data = $(this).serialize();
         var id = $('#eventId').val();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
         $.ajax({
             url: 'api/events/' + id,
             type: 'PUT',
@@ -141,6 +151,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     $('#deleteButton').on('click', function () {
         var id = $('#eventId').val();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
         $.ajax({
             url: 'api/events/' + id,
             type: 'DELETE',
